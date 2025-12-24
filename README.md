@@ -1,1 +1,487 @@
-# HIHI
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greetings to My Online Friends</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: #e0e7ff;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        /* Greeting Card Styles */
+        .card {
+            width: 400px;
+            height: 500px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-inside {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .card-front {
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #333;
+        }
+
+        .card-inside {
+            background: linear-gradient(45deg, #a1c4fd 0%, #c2e9fb 100%);
+            transform: rotateY(180deg);
+            text-align: left;
+            overflow-y: auto;
+        }
+
+        .card-header {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #6a11cb;
+        }
+
+        .card-icon {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            color: #6a11cb;
+        }
+
+        .open-instruction {
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .message-area {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 10px;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            margin-top: 30px;
+            text-align: right;
+            width: 100%;
+            color: #6a11cb;
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .controls h2 {
+            color: #6a11cb;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #6a11cb;
+            outline: none;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .flip-btn {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: #ffeb3b;
+        }
+
+        .instructions {
+            color: #e0e7ff;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .card-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card, .controls {
+                width: 90%;
+                max-width: 400px;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Greetings to My Online Friends</h1>
+        <p class="subtitle">Send warm wishes to your friends across the digital world with this personalized greeting card</p>
+        
+        <div class="card-container">
+            <!-- Greeting Card -->
+            <div class="card" id="greetingCard">
+                <div class="card-front">
+                    <div class="card-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h2 class="card-header">To My Online Friends</h2>
+                    <p class="message-area">Click the card to open and see your personalized message!</p>
+                    <p class="open-instruction"><i class="fas fa-hand-point-up"></i> Click to Open</p>
+                </div>
+                
+                <div class="card-inside">
+                    <h2 class="card-header">Dear <span id="friendName">Friend</span>,</h2>
+                    <p class="message-area" id="messageText">
+                        Even though we've never met in person, our connection means so much to me. 
+                        Thank you for being part of my online world and sharing laughs, support, 
+                        and great conversations. I appreciate our digital friendship more than you know!
+                    </p>
+                    <p class="message-area" id="customMessage">
+                        Wishing you all the best from my corner of the internet to yours!
+                    </p>
+                    <div class="signature">Your friend, <span id="senderName">Alex</span></div>
+                </div>
+            </div>
+            
+            <!-- Controls Panel -->
+            <div class="controls">
+                <h2>Personalize Your Card</h2>
+                
+                <div class="control-group">
+                    <label for="friendNameInput">Friend's Name</label>
+                    <input type="text" id="friendNameInput" placeholder="Enter your friend's name" value="Digital Pal">
+                </div>
+                
+                <div class="control-group">
+                    <label for="messageType">Message Type</label>
+                    <select id="messageType">
+                        <option value="friendly">Friendly Greeting</option>
+                        <option value="birthday">Birthday Wishes</option>
+                        <option value="thankyou">Thank You</option>
+                        <option value="encouragement">Words of Encouragement</option>
+                        <option value="custom">Custom Message</option>
+                    </select>
+                </div>
+                
+                <div class="control-group" id="customMessageGroup">
+                    <label for="customMessageInput">Your Custom Message</label>
+                    <textarea id="customMessageInput" placeholder="Type your personal message here...">Wishing you all the best from my corner of the internet to yours!</textarea>
+                </div>
+                
+                <div class="control-group">
+                    <label for="senderNameInput">Your Name</label>
+                    <input type="text" id="senderNameInput" placeholder="Enter your name" value="Alex">
+                </div>
+                
+                <div class="control-group">
+                    <label for="themeColor">Card Theme</label>
+                    <select id="themeColor">
+                        <option value="warm">Warm Tones</option>
+                        <option value="cool">Cool Tones</option>
+                        <option value="bright">Bright & Cheerful</option>
+                    </select>
+                </div>
+                
+                <button id="updateCard">Update Greeting Card</button>
+                <button class="flip-btn" id="flipCard">Flip Card <i class="fas fa-sync-alt"></i></button>
+            </div>
+        </div>
+        
+        <div class="social-icons">
+            <a href="#" title="Share on Discord"><i class="fab fa-discord"></i></a>
+            <a href="#" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="Share on Reddit"><i class="fab fa-reddit"></i></a>
+            <a href="#" title="Copy as Image"><i class="fas fa-copy"></i></a>
+            <a href="#" title="Send via Email"><i class="fas fa-envelope"></i></a>
+        </div>
+        
+        <p class="instructions">
+            Personalize the card using the controls, then flip it to see your customized message. 
+            Share with your online friends via the icons above!
+        </p>
+    </div>
+
+    <script>
+        // DOM Elements
+        const greetingCard = document.getElementById('greetingCard');
+        const flipCardBtn = document.getElementById('flipCard');
+        const updateCardBtn = document.getElementById('updateCard');
+        const friendNameInput = document.getElementById('friendNameInput');
+        const messageTypeSelect = document.getElementById('messageType');
+        const customMessageGroup = document.getElementById('customMessageGroup');
+        const customMessageInput = document.getElementById('customMessageInput');
+        const senderNameInput = document.getElementById('senderNameInput');
+        const themeColorSelect = document.getElementById('themeColor');
+        
+        // Message templates
+        const messageTemplates = {
+            friendly: "Even though we've never met in person, our connection means so much to me. Thank you for being part of my online world and sharing laughs, support, and great conversations. I appreciate our digital friendship more than you know!",
+            birthday: "Happy Birthday! I hope your special day is filled with joy, laughter, and all your favorite things. Even though we're connecting digitally, I'm sending you the warmest wishes from here!",
+            thankyou: "I just wanted to take a moment to thank you for your kindness, support, and friendship. Our online interactions always brighten my day, and I'm grateful to have you in my digital circle.",
+            encouragement: "Just wanted to send some encouragement your way! Remember that you're capable, strong, and appreciated - even by online friends like me who've never met you in person.",
+            custom: ""
+        };
+        
+        // Theme color settings
+        const themeColors = {
+            warm: {
+                front: 'linear-gradient(45deg, #ff9a9e 0%, #fad0c4 100%)',
+                inside: 'linear-gradient(45deg, #a1c4fd 0%, #c2e9fb 100%)',
+                header: '#6a11cb'
+            },
+            cool: {
+                front: 'linear-gradient(45deg, #89f7fe 0%, #66a6ff 100%)',
+                inside: 'linear-gradient(45deg, #a3bded 0%, #6991c7 100%)',
+                header: '#2575fc'
+            },
+            bright: {
+                front: 'linear-gradient(45deg, #ffecd2 0%, #fcb69f 100%)',
+                inside: 'linear-gradient(45deg, #ff9a9e 0%, #fecfef 100%)',
+                header: '#ff6b6b'
+            }
+        };
+        
+        // Event Listeners
+        greetingCard.addEventListener('click', flipCard);
+        flipCardBtn.addEventListener('click', flipCard);
+        updateCardBtn.addEventListener('click', updateCard);
+        messageTypeSelect.addEventListener('change', toggleCustomMessage);
+        
+        // Initialize the card
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCard();
+        });
+        
+        // Functions
+        function flipCard() {
+            greetingCard.classList.toggle('flipped');
+            
+            // Update button text based on card state
+            const isFlipped = greetingCard.classList.contains('flipped');
+            flipCardBtn.innerHTML = isFlipped 
+                ? 'Flip Card Back <i class="fas fa-undo"></i>' 
+                : 'Flip Card <i class="fas fa-sync-alt"></i>';
+        }
+        
+        function updateCard() {
+            // Update friend's name
+            const friendNameSpan = document.getElementById('friendName');
+            friendNameSpan.textContent = friendNameInput.value || 'Friend';
+            
+            // Update sender's name
+            const senderNameSpan = document.getElementById('senderName');
+            senderNameSpan.textContent = senderNameInput.value || 'Alex';
+            
+            // Update message based on type
+            const messageType = messageTypeSelect.value;
+            const messageText = document.getElementById('messageText');
+            
+            if (messageType === 'custom') {
+                messageText.textContent = customMessageInput.value;
+                document.getElementById('customMessage').textContent = '';
+            } else {
+                messageText.textContent = messageTemplates[messageType];
+                document.getElementById('customMessage').textContent = customMessageInput.value || '';
+            }
+            
+            // Update theme
+            const theme = themeColorSelect.value;
+            const cardFront = document.querySelector('.card-front');
+            const cardInside = document.querySelector('.card-inside');
+            const cardHeader = document.querySelectorAll('.card-header');
+            const cardIcon = document.querySelector('.card-icon');
+            
+            cardFront.style.background = themeColors[theme].front;
+            cardInside.style.background = themeColors[theme].inside;
+            
+            cardHeader.forEach(header => {
+                header.style.color = themeColors[theme].header;
+            });
+            
+            cardIcon.style.color = themeColors[theme].header;
+            
+            // Show a brief confirmation
+            updateCardBtn.innerHTML = '<i class="fas fa-check"></i> Card Updated!';
+            setTimeout(() => {
+                updateCardBtn.innerHTML = 'Update Greeting Card';
+            }, 1500);
+        }
+        
+        function toggleCustomMessage() {
+            if (messageTypeSelect.value === 'custom') {
+                customMessageGroup.style.display = 'block';
+            } else {
+                customMessageGroup.style.display = 'none';
+            }
+        }
+        
+        // Social sharing buttons functionality
+        document.querySelectorAll('.social-icons a').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const action = this.title;
+                let message = `Check out this cool online greeting card for my friend ${friendNameInput.value || 'Friend'}!`;
+                
+                switch(action) {
+                    case 'Share on Discord':
+                        alert(`Discord sharing simulated: "${message}"`);
+                        break;
+                    case 'Share on Twitter':
+                        alert(`Twitter sharing simulated: "${message}"`);
+                        break;
+                    case 'Share on Reddit':
+                        alert(`Reddit sharing simulated: "${message}"`);
+                        break;
+                    case 'Copy as Image':
+                        alert('Card image copied to clipboard (simulated)');
+                        break;
+                    case 'Send via Email':
+                        alert(`Email sending simulated to your online friend ${friendNameInput.value || 'Friend'}`);
+                        break;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
